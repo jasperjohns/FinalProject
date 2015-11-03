@@ -1,5 +1,15 @@
 apply plugin: 'com.android.application'
 
+/*
+sourceSets {
+    testLocal {
+        java.srcDir file('src/androidTest/java')
+        resources.srcDir file('src/androidTest/resources')
+    }
+}
+*/
+
+
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
@@ -44,4 +54,21 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.google.android.gms:play-services:7.5.0'
     compile project(path: ':backend', configuration: 'android-endpoints')
+    testCompile 'junit:junit:4.12'
+    testCompile "org.mockito:mockito-core:1.9.5"
 }
+
+
+/*task localTest(type: Test, dependsOn: assemble) {
+    testClassesDir = sourceSets.testLocal.output.classesDir
+
+    android.sourceSets.main.java.srcDirs.each { dir ->
+        def buildDir = dir.getAbsolutePath().split('/')
+        buildDir = (buildDir[0..(buildDir.length - 4)] + ['build', 'classes', 'debug']).join('/')
+
+        sourceSets.testLocal.compileClasspath += files(buildDir)
+        sourceSets.testLocal.runtimeClasspath += files(buildDir)
+    }
+
+    classpath = sourceSets.testLocal.runtimeClasspath
+}*/
